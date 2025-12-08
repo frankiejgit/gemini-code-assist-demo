@@ -4,7 +4,7 @@
 
 **Repo Structure:**
 ```text
-hard-rock-admin-demo/
+digital-casino-code-assist/
 ├── api/
 │   ├── main.py            # currently Flask (Refactor target)
 │   ├── logic.py           # Risk calculation logic (Explain Code target)
