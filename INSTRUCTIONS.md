@@ -57,8 +57,8 @@ Before the demo, you must ensure Gemini does not read this instruction file. You
 
 __Goal:__ Show how Gemini understands business/code logic instantly.
 
-1. Open api/logic.py.
-2. Highlight the entire calculate_risk_score function.
+1. Open `api/logic.py`.
+2. Highlight the entire `calculate_risk_score` function.
 3. Prompt:
 ```
 Explain this risk calculation logic in plain English. What specific behaviors trigger a high risk score?
@@ -82,7 +82,7 @@ Talk Track:
 ### Velocity (The "New Feature" Use Case)
 __Goal:__ Add a missing API endpoint to handle VIP logic.
 
-1. Open api/main.py.
+1. Open `api/main.py`.
 2. Scroll to the bottom of the file (before the if __name__ block).
 3. Prompt:
 ```
@@ -96,7 +96,7 @@ Talk Track:
 __Goal:__ Migrate legacy Flask code to modern FastAPI.
 
 __Part A: Generate Models__
-1. Open api/models.py (It is currently empty).
+1. Open `api/models.py` (It is currently empty).
 2. Prompt:
 ```
 Look at data/mock_db.py and create Pydantic models in api/models.py to represent a Player and a Wager.
@@ -105,7 +105,7 @@ Look at data/mock_db.py and create Pydantic models in api/models.py to represent
 
 __Part B: The Refactor__
 
-1. Open api/main.py.
+1. Open `api/main.py`.
 2. Prompt:
 ```
 Refactor this entire file to use FastAPI instead of Flask. Use the logic in api/logic.py and the Pydantic models we just created in api/models.py. Keep the same endpoints.

@@ -5,6 +5,7 @@ PLAYERS = [
     {"id": 1, "name": "Alice Highroller", "tier": "Legend", "account_age_days": 1200, "status": "active"},
     {"id": 2, "name": "Bob Casual", "tier": "Bronze", "account_age_days": 45, "status": "active"},
     {"id": 3, "name": "Charlie Risk", "tier": "Silver", "account_age_days": 10, "status": "under_review"},
+    {"id": 4, "name": "Dennis Dice", "tier": "Gold", "account_age_days": 967, "status": "active"}
 ]
 
 def get_mock_wagers(player_id):
