@@ -20,7 +20,7 @@ hard-rock-admin-demo/
 
 1. Clone this repository
 ```
-git clone <repo-URL>
+git clone https://github.com/frankiejgit/digital-casino-code-assist.git
 cd code-assist-player-risk-demo
 ```
 
@@ -61,7 +61,7 @@ __Goal:__ Show how Gemini understands business/code logic instantly.
 2. Highlight the entire calculate_risk_score function.
 3. Prompt:
 ```
-"Explain this risk calculation logic in plain English. What specific behaviors trigger a high risk score?"
+Explain this risk calculation logic in plain English. What specific behaviors trigger a high risk score?
 ```
 
 Talk Track:
@@ -73,7 +73,7 @@ __Goal:__ Automate the creation of missing documentation.
 1. Open the Chat panel (ensure no specific text is highlighted).
 2. Prompt:
 ```
-"Generate a professional README.md for this project. Include an overview of the Flask backend, the Streamlit frontend, and instructions on how to install requirements and run the app."
+Generate a professional README.md for this project. Include an overview of the Flask backend, the Streamlit frontend, and instructions on how to install requirements and run the app.
 ```
 
 Talk Track:
@@ -86,7 +86,7 @@ __Goal:__ Add a missing API endpoint to handle VIP logic.
 2. Scroll to the bottom of the file (before the if __name__ block).
 3. Prompt:
 ```
-"I need to add a new endpoint /vip_check/{player_id}. If a player has wagered over $15,000 lifetime, return status 'VIP', otherwise 'Standard'. Use the existing get_mock_wagers function to calculate this."
+I need to add a new endpoint /vip_check/{player_id}. If a player has wagered over $15,000 lifetime, return status 'VIP', otherwise 'Standard'. Use the existing get_mock_wagers function to calculate this.
 ```
 
 Talk Track:
@@ -99,7 +99,7 @@ __Part A: Generate Models__
 1. Open api/models.py (It is currently empty).
 2. Prompt:
 ```
-"Look at data/mock_db.py and create Pydantic models in api/models.py to represent a Player and a Wager."
+Look at data/mock_db.py and create Pydantic models in api/models.py to represent a Player and a Wager.
 ```
 3. Action: Accept/Insert the code.
 
@@ -108,7 +108,7 @@ __Part B: The Refactor__
 1. Open api/main.py.
 2. Prompt:
 ```
-"Refactor this entire file to use FastAPI instead of Flask. Use the logic in api/logic.py and the Pydantic models we just created in api/models.py. Keep the same endpoints."
+Refactor this entire file to use FastAPI instead of Flask. Use the logic in api/logic.py and the Pydantic models we just created in api/models.py. Keep the same endpoints.
 ```
 
 Talk Track:
