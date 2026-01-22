@@ -4,7 +4,7 @@
 
 **Repo Structure:**
 ```text
-digital-casino-code-assist/
+gemini-code-assist-demo/
 ├── api/
 │   ├── main.py            # currently Flask (Refactor target)
 │   ├── logic.py           # Risk calculation logic (Explain Code target)
@@ -20,7 +20,7 @@ digital-casino-code-assist/
 
 1. Clone this repository
 ```
-git clone https://github.com/frankiejgit/digital-casino-code-assist.git
+git clone https://github.com/frankiejgit/gemini-code-assist-demo.git
 cd code-assist-player-risk-demo
 ```
 
