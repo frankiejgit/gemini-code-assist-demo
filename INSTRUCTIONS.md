@@ -26,6 +26,7 @@ cd code-assist-player-risk-demo
 
 2. Create a virtual environment using `uv`
 ```
+uv init
 uv venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 ```
