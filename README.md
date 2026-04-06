@@ -48,15 +48,12 @@ To get the most out of Gemini Code Assist during this demo (and in real workflow
 To prepare the "prop" application for the live demonstration:
 
 ```bash
-# 1. Authenticate (if using internal package registries)
-gcert
-
-# 2. Setup Python Environment
+# 1. Setup Python Environment
 uv init
 uv venv
 source .venv/bin/activate
 
-# 3. Install Dependencies
+# 2. Install Dependencies
 uv pip install -r requirements.txt
 ```
 
