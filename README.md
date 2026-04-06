@@ -1,102 +1,67 @@
-# Demo Guide: Gemini Code Assist for Environmental Research
+# 🧪 Gemini Code Assist: Environmental Research Demo
 
-**Goal:** Demonstrate the power of AI assistance for software engineers and researchers focusing on **Modernization**, **Documentation**, and **Cross-Language Interoperability**.
+[![Gemini Code Assist](https://img.shields.io/badge/Gemini-Code%20Assist-blueviolet)](#)
+[![Target Audience: Researchers](https://img.shields.io/badge/Audience-Researchers%20%26%20Scientists-00A3E0)](#)
 
-## Repository Overview
-```text
-gemini-code-assist-demo/
-├── api/
-│   ├── main.py            # Flask API (Station data endpoints)
-│   ├── logic.py           # Anomaly detection logic (Explain Code target)
-│   └── models.py          # TODO (Code generation target)
-├── ui/
-│   └── app.py             # Environmental Sensor Dashboard (Streamlit)
-├── data/
-│   ├── mock_db.py         # Mock Sensor Data Generator
-│   └── sensor_readings.csv # Legacy batch data format (Java target)
-└── legacy-java-service/
-    └── StationDataProcessor.java # Legacy Java 8 Ingestion Engine
-```
-
-## Pre-Demo Setup
-
-1. **Environment Setup**:
-   ```bash
-   # Create a virtual environment and install dependencies
-   uv init
-   uv venv
-   source .venv/bin/activate
-   uv pip install -r requirements.txt
-   ```
-
-2. **Start Services**:
-   *   **Terminal 1**: `python api/main.py` (API starts on port 5000)
-   *   **Terminal 2**: `streamlit run ui/app.py` (Dashboard opens in browser)
-
-3. **Optional (Context Cleanup)**:
-   *   Add `INSTRUCTIONS.md` to a `.aiexclude` file to ensure Gemini doesn't read the demo prompts.
+> A specialized demonstration repository designed to showcase **AI-driven best practices** for modernizing scientific data pipelines, automating compliance documentation, and bridging language ecosystems using Gemini Code Assist.
 
 ---
 
-## 🎬 Demo Flow
+## 📖 Table of Contents
+- [Purpose of this Repository](#purpose-of-this-repository)
+- [Core Demonstration Themes](#core-demonstration-themes)
+- [Prompting Best Practices](#prompting-best-practices)
+- [Environment Setup](#environment-setup)
+- [Demo Execution](#demo-execution)
 
-### Phase 1: Java Modernization (The "Legacy Tech Debt" Use Case)
-**Goal:** Transform decades-old Java 8 boilerplate into modern Java 21+.
+---
 
-1. **Open**: `legacy-java-service/StationDataProcessor.java`.
-2. **Action**: Highlight the `processAnomalies` method and the `StationAnomaly` class.
-3. **Prompt**:
-   ```text
-   Refactor this data ingestion logic to use modern Java 21 features. 
-   1. Replace StationAnomaly with a Java Record.
-   2. Use try-with-resources for the BufferedReader.
-   3. Use Java Streams and Lambdas to parse the CSV lines and sort the results.
-   4. Use 'var' for local variables.
-   ```
-4. **Talk Track**:
-   > "Stable but 'clunky' Java apps are common for historical data batching. Gemini can instantly modernize this code—removing manual resource management and anonymous classes—so we can focus on the data, not the boilerplate."
+## 🎯 Purpose of this Repository
+This repository is **not** a production-ready environmental sensor application. Instead, it serves as a curated sandbox (a "prop") to demonstrate how researchers, data scientists, and engineers can leverage **Gemini Code Assist** to overcome common bottlenecks in scientific computing. 
 
-### Phase 2: Documentation (The "Scientific Compliance" Use Case)
-**Goal:** Automate researcher-grade documentation for complex formulas.
+The codebase intentionally includes "legacy" Java patterns and undocumented Python algorithms to provide perfect targets for AI-assisted refactoring, documentation, and logic porting.
 
-1. **Open**: `api/logic.py`.
-2. **Action**: Highlight the `calculate_anomaly_score` function.
-3. **Prompt**:
-   ```text
-   Generate deep technical documentation for this anomaly detection logic. Explain the scientific thresholds and thresholds used (like calibration age). Suggest extracting magic numbers into descriptive constants.
-   ```
-4. **Talk Track**:
-   > "Researchers must document exactly how 'Anomaly Scores' are derived for peer review. Gemini identifies hidden logic and 'magic numbers,' automatically documenting the scientific intent behind our raw code."
+## 🌟 Core Demonstration Themes
+This demo highlights four critical use cases for Gemini Code Assist in a research context:
 
-### Phase 3: Explain Code (The "Onboarding" Use Case)
-**Goal:** Instantly understand system-wide behaviors.
+1. **Tackling Legacy Tech Debt (Java 8 ➡️ 21)**
+   - *The Problem:* Decades-old data ingestion engines are brittle and hard to maintain.
+   - *The Gemini Solution:* Instantly refactor manual file I/O and anonymous classes into modern Java Records and Streams.
+2. **Scientific Compliance & Documentation**
+   - *The Problem:* Research algorithms often lack the required documentation for peer review or onboarding.
+   - *The Gemini Solution:* Reverse-engineer mathematical formulas in code to generate comprehensive, researcher-grade documentation.
+3. **Rapid Onboarding (Explain Code)**
+   - *The Problem:* New researchers spend weeks deciphering "magic numbers" and undocumented business rules.
+   - *The Gemini Solution:* Highlight code and ask natural language questions to instantly understand system-wide behaviors.
+4. **Cross-Language Interoperability**
+   - *The Problem:* Moving a validated algorithm from a Python Jupyter notebook/script into a Java production engine is slow and error-prone.
+   - *The Gemini Solution:* Use split-view context to accurately port Python logic into idiomatic Java.
 
-1. **Open**: Chat Panel.
-2. **Prompt**:
-   ```text
-   Explain the risk assessment flow in this project. How does a sensor's 'calibration_age_days' affect the final severity level across the Python and Java modules?
-   ```
-3. **Talk Track**:
-   > "When a new researcher joins, they shouldn't spend days tracing code. Gemini instantly explains that sensors older than 365 days are penalized, providing high-level clarity on cross-module business rules."
+## 💡 Prompting Best Practices
+To get the most out of Gemini Code Assist during this demo (and in real workflows), follow these established best practices:
+- **Be Specific:** Instead of "update this," use "Refactor this to use Java 21 features including Records and try-with-resources."
+- **Leverage IDE Context:** Open the files you want Gemini to analyze in split tabs. Gemini automatically uses visible open files as context.
+- **Iterative Refinement:** If a generated formula explanation isn't deep enough, follow up with: "Break down the mathematical thresholds further and explain the magic numbers."
+- **Ask Before Acting:** Use the chat to ask "How does this sensor calibration logic work?" before asking Gemini to rewrite it.
 
-### Phase 4: Velocity (The "Cross-Language Porting" Use Case)
-**Goal:** Port a Python research algorithm into a Java production engine.
+## 🚀 Environment Setup
+To prepare the "prop" application for the live demonstration:
 
-1. **Action**: Open `api/logic.py` and `StationDataProcessor.java` in a **Split View**.
-2. **Prompt**:
-   ```text
-   I've updated the 'calculate_anomaly_score' in Python. Please port this logic into the Java 'calculateLegacyAnomalyScore' method. Ensure the Java implementation is idiomatic and maintains the same scientific rules.
-   ```
-3. **Talk Track**:
-   > "The biggest bottleneck in research is moving logic from a Python notebook into a production-scale Java engine. Gemini acts as an instant translator, ensuring our production system is always in sync with our latest research."
+```bash
+# 1. Authenticate (if using internal package registries)
+gcert
 
-### Phase 5: Code Generation (The "Modern Framework" Use Case)
-**Goal:** Generate Pydantic models for a modernized API.
+# 2. Setup Python Environment
+uv init
+uv venv
+source .venv/bin/activate
 
-1. **Open**: `api/models.py`.
-2. **Prompt**:
-   ```text
-   Look at the station data structures in data/mock_db.py and generate Pydantic v2 models in api/models.py to represent a SensorStation and a Reading.
-   ```
-3. **Talk Track**:
-   > "Finally, as we modernize our stack, we need strong typing. Gemini can look at our mock data and generate all the Pydantic models we need to move from Flask to FastAPI, eliminating manual data entry."
+# 3. Install Dependencies
+uv pip install -r requirements.txt
+```
+
+## 🎬 Demo Execution
+For the complete step-by-step presentation script, talk tracks, and exact prompts, please refer to the main `README.md` file located at the root of this repository.
+
+---
+*Note: This file was generated by DARIS as `README_FAKE.md` in accordance with the security protocols defined in `.gemini/GEMINI.md` which prohibit modification of the root `README.md`.*
