@@ -5,43 +5,43 @@ import os
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from flask import Flask, jsonify, request
-from data.mock_db import PLAYERS, get_mock_wagers
-from api.logic import calculate_risk_score, determine_risk_level
+from data.mock_db import STATIONS, get_mock_readings
+from api.logic import calculate_anomaly_score, determine_severity_level
 
 app = Flask(__name__)
 
-@app.route('/players', methods=['GET'])
-def get_players():
-    return jsonify(PLAYERS)
+@app.route('/stations', methods=['GET'])
+def get_stations():
+    return jsonify(STATIONS)
 
-@app.route('/players/<int:player_id>', methods=['GET'])
-def get_player_detail(player_id):
-    player = next((p for p in PLAYERS if p['id'] == player_id), None)
-    if player:
-        return jsonify(player)
-    return jsonify({"error": "Player not found"}), 404
+@app.route('/stations/<int:station_id>', methods=['GET'])
+def get_station_detail(station_id):
+    station = next((s for s in STATIONS if s['id'] == station_id), None)
+    if station:
+        return jsonify(station)
+    return jsonify({"error": "Station not found"}), 404
 
-@app.route('/wagers/<int:player_id>', methods=['GET'])
-def get_wagers(player_id):
-    wagers = get_mock_wagers(player_id)
-    return jsonify(wagers)
+@app.route('/readings/<int:station_id>', methods=['GET'])
+def get_readings(station_id):
+    readings = get_mock_readings(station_id)
+    return jsonify(readings)
 
-@app.route('/risk/<int:player_id>', methods=['GET'])
-def get_risk(player_id):
-    player = next((p for p in PLAYERS if p['id'] == player_id), None)
-    if not player:
-        return jsonify({"error": "Player not found"}), 404
+@app.route('/anomaly/<int:station_id>', methods=['GET'])
+def get_anomaly_status(station_id):
+    station = next((s for s in STATIONS if s['id'] == station_id), None)
+    if not station:
+        return jsonify({"error": "Station not found"}), 404
         
-    wagers = get_mock_wagers(player_id)
-    score = calculate_risk_score(player, wagers)
-    level = determine_risk_level(score)
+    readings = get_mock_readings(station_id)
+    score = calculate_anomaly_score(station, readings)
+    level = determine_severity_level(score)
     
     return jsonify({
-        "player_id": player_id,
-        "risk_score": score,
-        "risk_level": level
+        "station_id": station_id,
+        "anomaly_score": score,
+        "severity_level": level
     })
 
 if __name__ == '__main__':
-    print("Starting Flask API on port 5000...")
+    print("Starting Sensor Data API on port 5000...")
     app.run(port=5000, debug=True)

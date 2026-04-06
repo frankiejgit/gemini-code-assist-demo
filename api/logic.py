@@ -1,36 +1,37 @@
-def calculate_risk_score(player_data, wagers):
+def calculate_anomaly_score(station_data, readings):
     """
-    Calculates a risk score (0-100) based on betting behavior.
+    Calculates an anomaly score (0-100) based on sensor behavior.
     
     Args:
-        player_data (dict): Player profile
-        wagers (list): List of wager dictionaries
+        station_data (dict): Station profile
+        readings (list): List of sensor reading dictionaries
     """
-    if not wagers:
+    if not readings:
         return 0
 
-    total_loss = sum(w['amount'] for w in wagers if w['result'] == 'loss')
-    total_wagered = sum(w['amount'] for w in wagers)
+    total_anomalies = sum(1 for r in readings if r['status'] == 'anomaly')
+    total_readings = len(readings)
     
-    # Base risk: High losses relative to simple threshold
-    risk_score = min(100, int((total_loss / 1000) * 10))
+    # Base score from anomaly frequency
+    anomaly_rate = (total_anomalies / total_readings) if total_readings > 0 else 0
+    anomaly_score = min(100, int(anomaly_rate * 200)) # Scale up for visibility
     
-    # Velocity risk: High frequency betting check (simplified)
-    if len(wagers) > 40:
-        risk_score += 15
+    # Calibration age risk factor (sensors need calibration every 365 days)
+    if station_data.get('calibration_age_days', 0) > 365:
+        anomaly_score += 20
         
-    # New account risk factor
-    if player_data.get('account_age_days', 0) < 30:
-        risk_score += 10
+    # Frequent fluctuation penalty
+    if len(readings) > 40:
+        anomaly_score += 10
 
     # Cap at 100
-    return min(100, risk_score)
+    return min(100, anomaly_score)
 
-def determine_risk_level(score):
+def determine_severity_level(score):
     if score > 80:
         return "Critical"
     elif score > 50:
         return "High"
     elif score > 20:
-        return "Medium"
-    return "Low"
+        return "Moderate"
+    return "Stable"

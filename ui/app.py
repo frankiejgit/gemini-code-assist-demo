@@ -5,22 +5,22 @@ import plotly.express as px
 
 API_URL = "http://127.0.0.1:5000"
 
-st.set_page_config(page_title="Player Risk Admin", layout="wide")
-st.title("🎸 Digital Casino: Player Risk Portal")
+st.set_page_config(page_title="Environmental Sensor Dashboard", layout="wide")
+st.title("🌱 Environmental Research: Sensor Health Portal")
 
 # Sidebar
-st.sidebar.header("Player Lookup")
+st.sidebar.header("Station Lookup")
 
-# Fetch Players
+# Fetch Stations
 try:
-    response = requests.get(f"{API_URL}/players")
+    response = requests.get(f"{API_URL}/stations")
     if response.status_code == 200:
-        players = response.json()
-        player_map = {p['name']: p['id'] for p in players}
-        selected_name = st.sidebar.selectbox("Select Player", list(player_map.keys()))
-        selected_id = player_map[selected_name]
+        stations = response.json()
+        station_map = {s['name']: s['id'] for s in stations}
+        selected_name = st.sidebar.selectbox("Select Sensor Station", list(station_map.keys()))
+        selected_id = station_map[selected_name]
     else:
-        st.error("Failed to fetch players.")
+        st.error("Failed to fetch sensor stations.")
         st.stop()
 except requests.exceptions.ConnectionError:
     st.error(f"Cannot connect to API at {API_URL}. Is api/main.py running?")
@@ -28,31 +28,31 @@ except requests.exceptions.ConnectionError:
 
 if selected_id:
     # Fetch Details
-    p_data = requests.get(f"{API_URL}/players/{selected_id}").json()
-    risk_data = requests.get(f"{API_URL}/risk/{selected_id}").json()
-    wagers_data = requests.get(f"{API_URL}/wagers/{selected_id}").json()
+    s_data = requests.get(f"{API_URL}/stations/{selected_id}").json()
+    status_data = requests.get(f"{API_URL}/anomaly/{selected_id}").json()
+    readings_data = requests.get(f"{API_URL}/readings/{selected_id}").json()
 
     # Key Metrics
     col1, col2, col3 = st.columns(3)
-    col1.metric("Player Name", p_data['name'])
-    col2.metric("Tier", p_data['tier'])
-    col3.metric("Risk Level", risk_data['risk_level'], f"Score: {risk_data['risk_score']}")
+    col1.metric("Station Name", s_data['name'])
+    col2.metric("Model", s_data['model'])
+    col3.metric("Severity Level", status_data['severity_level'], f"Score: {status_data['anomaly_score']}")
 
-    # Wager Analysis
-    st.subheader("Wager History")
-    if wagers_data:
-        df = pd.DataFrame(wagers_data)
+    # Reading Analysis
+    st.subheader("Sensor Reading History")
+    if readings_data:
+        df = pd.DataFrame(readings_data)
         
         # Simple stats
-        wins = df[df['result'] == 'win'].shape[0]
-        losses = df[df['result'] == 'loss'].shape[0]
-        st.write(f"**Win/Loss Record:** {wins} Wins / {losses} Losses")
+        valid = df[df['status'] == 'valid'].shape[0]
+        anomalies = df[df['status'] == 'anomaly'].shape[0]
+        st.write(f"**Data Quality Summary:** {valid} Valid Readings / {anomalies} Anomalies Detected")
 
         # Chart
-        fig = px.bar(df, x='game', y='amount', color='result', title="Betting Volume by Game")
+        fig = px.bar(df, x='metric', y='value', color='status', title="Measurement Value by Metric Type")
         st.plotly_chart(fig, use_container_width=True)
         
         # Table
         st.dataframe(df)
     else:
-        st.info("No wagers found for this player.")
+        st.info("No readings found for this station.")

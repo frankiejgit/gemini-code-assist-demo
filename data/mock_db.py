@@ -1,32 +1,32 @@
 import random
 import datetime
 
-PLAYERS = [
-    {"id": 1, "name": "Alice Highroller", "tier": "Legend", "account_age_days": 1200, "status": "active"},
-    {"id": 2, "name": "Bob Casual", "tier": "Bronze", "account_age_days": 45, "status": "active"},
-    {"id": 3, "name": "Charlie Risk", "tier": "Silver", "account_age_days": 10, "status": "under_review"},
-    {"id": 4, "name": "Dennis Dice", "tier": "Gold", "account_age_days": 967, "status": "active"}
+STATIONS = [
+    {"id": 1, "name": "North Hill Station", "model": "Gen-1", "calibration_age_days": 1200, "status": "active"},
+    {"id": 2, "name": "River Basin Delta", "model": "Gen-2", "calibration_age_days": 45, "status": "active"},
+    {"id": 3, "name": "Urban Canyon West", "model": "Gen-1", "calibration_age_days": 10, "status": "maintenance_required"},
+    {"id": 4, "name": "Forest Canopy Alpha", "model": "Gen-3", "calibration_age_days": 967, "status": "active"}
 ]
 
-def get_mock_wagers(player_id):
-    """Generates random wager history for a given player."""
-    wagers = []
+def get_mock_readings(station_id):
+    """Generates random sensor reading history for a given station."""
+    readings = []
     # Deterministic seed for demo consistency
-    random.seed(player_id) 
+    random.seed(station_id) 
     
-    num_wagers = random.randint(5, 50)
-    for _ in range(num_wagers):
-        amount = round(random.uniform(10.0, 5000.0), 2)
-        win = random.choice([True, False])
-        wagers.append({
-            "date": (datetime.datetime.now() - datetime.timedelta(days=random.randint(0, 30))).strftime("%Y-%m-%d"),
-            "game": random.choice(["Blackjack", "Sportsbook - NFL", "Slots", "Roulette"]),
-            "amount": amount,
-            "result": "win" if win else "loss",
-            "payout": amount * 2 if win else 0
+    num_readings = random.randint(5, 50)
+    for _ in range(num_readings):
+        value = round(random.uniform(5.0, 150.0), 2)
+        is_anomaly = random.random() < 0.1  # 10% chance of anomaly
+        readings.append({
+            "timestamp": (datetime.datetime.now() - datetime.timedelta(days=random.randint(0, 30))).strftime("%Y-%m-%d %H:%M:%S"),
+            "metric": random.choice(["PM2.5", "CO2", "NO2", "Temperature"]),
+            "value": value,
+            "status": "anomaly" if is_anomaly else "valid",
+            "variance": round(random.uniform(0.1, 5.0), 2) if is_anomaly else 0.0
         })
-    return wagers
+    return readings
 
 if __name__ == "__main__":
-    for player in PLAYERS:
-        print(get_mock_wagers(player["id"]))
+    for station in STATIONS:
+        print(get_mock_readings(station["id"]))

@@ -1,0 +1,6 @@
+station_id,uptime_hrs,anomalies_detected,calibration_age_days
+S001,5000,120,45
+S002,15000,800,22
+S003,2000,10,60
+S004,10000,50,19
+S005,500,45,35
